@@ -1,24 +1,31 @@
-Caracas 0 0
-Valencia 10 10
-Barquisimeto 15 10 
-San Cristobal 15 20
-Ciudad de sucre 15 40
+Boa vista 30 38
+Tepequém 28 37
+Rio de Janeiro 35 25
+Fonte Boa 25 26
+Carauari 25 28
 
-San Roman 20 40
-Ocaña 20 30
-Bogota 40 50 
-Tuqueres 50 55
-La Hormiga 45 60
+San Cristobal 28 41
+Ciudad de sucre 27 42 
+Caracas 25 50
+Valencia 24 47
+Barquisimeto 24 48
 
-San Gabriel 70 75
-Lumbaqui    65 80
-Quito 	    90 90
-Cantón Huaquillas 100 110
-Macará       95  115
 
-Tumbes 110  115
-Suyo   100  125
-Piura  100   140
-Huancabamba 95 135
-Lima 130 150 
+San Roman 22 46
+Ocaña 23 48
+Bogota 20 45
+Tuqueres 16 38
+La Hormiga 15 38
+
+San Gabriel 14 36
+Lumbaqui 13 37 
+Quito 10 35	    
+Cantón Huaquillas 7 32
+Macará 6 31 
+
+Tumbes 6 30 
+Suyo 7 30
+Piura 6 29
+Huancabamba 7 28 
+Lima 5 25
 
