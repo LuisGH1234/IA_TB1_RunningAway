@@ -1,0 +1,59 @@
+// El problema del 23
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+using namespace System;
+
+
+struct mochila
+	{
+		int precio;
+		int peso;
+		bool selec;
+	};
+
+
+void LindaWawita(int dinero,int peso ,int posicion,mochila *elementos,int k)
+	{
+		if (dinero == 0 || k==6 || peso == 0)
+			return ;
+		if (dinero - elementos[k].precio >= 0 && elementos[k].selec == false && k!=posicion && peso-elementos[k].peso>=0)
+				{
+					peso -= elementos[k].peso;
+					dinero -= elementos[k].precio;
+					elementos[k].selec = true;
+				}
+		LindaWawita(dinero,peso ,posicion, elementos, k+1);
+	}
+
+int main()
+	{
+		int dinero, peso; // Dinero = $24, peso = 16kg
+		mochila *elementos = new mochila[6];
+		cin >> dinero >> peso;
+		for (int i = 0; i < 6; i++)
+			{	
+				cin >> elementos[i].precio >> elementos[i].peso;
+				elementos[i].selec = false;
+			}
+		mochila aux;
+		for (int i = 1; i < 6; i++) 
+			for (int j = 0; j < 6-1 ; j++) 
+				if (elementos[i].precio > elementos[j].precio)
+				{
+					aux = elementos[i];
+					elementos[i] = elementos[j];
+					elementos[j] = aux;
+				}
+		elementos[2].selec = true;
+/*		cout << endl << endl;
+		for (int i = 0; i < 6; i++)
+				cout << elementos[i].precio << "  " << elementos[i].peso << endl;*/
+		LindaWawita(dinero-elementos[2].precio,peso-elementos[2].peso ,2, elementos,0);
+		cout << endl << endl;
+		for (int i = 0; i < 6; i++)
+			if (elementos[i].selec)
+				cout << elementos[i].precio << "  " << elementos[i].peso << endl;
+		_getch();
+	}
