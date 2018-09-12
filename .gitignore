@@ -39,3 +39,6 @@ Release
 *.vbproj.user
 ipch
 *sdf
+
+#hidden visual studio settings
+.vs
