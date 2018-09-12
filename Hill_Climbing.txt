@@ -1,10 +1,9 @@
-// El problema del 23
+
 #include <iostream>
 #include <conio.h>
 
 using namespace std;
 using namespace System;
-
 
 struct mochila
 	{
@@ -12,6 +11,8 @@ struct mochila
 		int peso;
 		bool selec;
 	};
+
+int contador = 0;
 
 
 void LindaWawita(int dinero,int peso ,int posicion,mochila *elementos,int k)
@@ -23,14 +24,16 @@ void LindaWawita(int dinero,int peso ,int posicion,mochila *elementos,int k)
 					peso -= elementos[k].peso;
 					dinero -= elementos[k].precio;
 					elementos[k].selec = true;
+					contador++;
 				}
 		LindaWawita(dinero,peso ,posicion, elementos, k+1);
 	}
 
 int main()
 	{
+		srand(time(NULL));
 		int dinero, peso; // Dinero = $24, peso = 16kg
-		int aleatorio = rand() % 6;
+		int aleatorio;
 		mochila *elementos = new mochila[6];
 		cin >> dinero >> peso;
 		for (int i = 0; i < 6; i++)
@@ -47,11 +50,15 @@ int main()
 					elementos[i] = elementos[j];
 					elementos[j] = aux;
 				}
+		do {
+			aleatorio = rand() % 5;
+		} while (dinero < elementos[aleatorio].precio, peso < elementos[aleatorio].peso);
 		elementos[aleatorio].selec = true;
 		LindaWawita(dinero-elementos[aleatorio].precio,peso-elementos[aleatorio].peso , aleatorio, elementos,0);
 		cout << endl << endl;
 		for (int i = 0; i < 6; i++)
 			if (elementos[i].selec)
 				cout << elementos[i].precio << "  " << elementos[i].peso << endl;
+		cout <<endl <<aleatorio<<" "<<contador;
 		_getch();
 	}
