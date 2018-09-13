@@ -98,7 +98,7 @@ private:
 		}
 
 		//Se cambia de Raiz Padre
-		HillClimbing(0, pos + 1, {}, resetItems(items));
+		HillClimbing(0, pos + 1, {}, items);
 		/*
 			0 -> como cambio de Raiz Padre el peso actual se reinicia
 			pos -> cambio de Raiz Padre
