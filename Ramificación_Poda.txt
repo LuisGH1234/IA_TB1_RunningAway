@@ -14,7 +14,6 @@ struct item
 		int peso;
 	};
 
-
 int main()
 	{
 		vector<item> items;
