@@ -76,6 +76,7 @@ private:
 	{
 		if (found == true) return;
 		if (pesoActual == pesoMax) {
+			//se encontro la solucion y guardo el resultado
 			found = true;
 			_Mochila = mochila;
 		}
@@ -90,10 +91,20 @@ private:
 
 		for (int i = 0; i < items.size(); i++)
 		{
+			//empiezo a ramificar
+			//el elemento raiz se empieza a probar con otros elementos
 			HillClimbing(pesoActual, i, mochila, items);
 			if (found == true) return;
 		}
+
+		//Se cambia de Raiz Padre
 		HillClimbing(0, pos + 1, {}, resetItems(items));
+		/*
+			0 -> como cambio de Raiz Padre el peso actual se reinicia
+			pos -> cambio de Raiz Padre
+			{} -> la mochila la reseteo ya que cambie de Raiz Padre
+			resetItems(items) -> vuelve la variable Selected de todos a "false"
+		*/
 	}
 
 	int sumaPesoTotalItems() 

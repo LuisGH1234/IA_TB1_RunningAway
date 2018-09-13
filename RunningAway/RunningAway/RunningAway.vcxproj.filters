@@ -26,5 +26,13 @@
     <ClInclude Include="Knapsack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SimulatedAnnealing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\backpack.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
