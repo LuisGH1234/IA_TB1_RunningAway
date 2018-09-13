@@ -1,0 +1,98 @@
+#include <conio.h>
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <time.h>
+
+using namespace System;
+using namespace std;
+
+struct elemento
+	{	
+		int id;
+		int peso;
+		int beneficio;
+		bool seleccionado;
+	};
+
+void Mochila(vector<elemento> vec, vector<vector<int>>Grafo, int seleccionado, int peso)
+	{
+		
+		int aux;
+		bool entro=false;
+		peso -= vec[seleccionado].peso;
+		if (peso <= 0)
+			return;
+		for(int i= 1; i < Grafo[seleccionado].size();i++)
+			for (int j = 0; j < Grafo[seleccionado].size()-1; j++)
+				if(vec[Grafo[seleccionado][i]].beneficio > vec[Grafo[seleccionado][j]].beneficio)
+					{
+						aux = Grafo[seleccionado][i];
+						Grafo[seleccionado][i] = Grafo[seleccionado][j];
+						Grafo[seleccionado][j] = aux;
+					}
+		int k;
+		for( k = 0; k < Grafo[seleccionado].size();k++)
+			if(vec[seleccionado].beneficio < vec[Grafo[seleccionado][k]].peso && vec[Grafo[seleccionado][k]].seleccionado==false)
+			{ 
+				vec[Grafo[seleccionado][k]].seleccionado = true;
+				entro= true;
+			}
+		if (entro)
+			Mochila(vec, Grafo, vec[Grafo[seleccionado][0]].id, peso);
+		else
+			return;
+	}
+
+void Ramificación_Poda( vector<elemento> vec,vector<vector<int>>Grafo, int peso, int i, int j)
+{
+	bool comprobar = true;
+	if (vec.size() == i || vec.size() == j)
+		return;
+		if(i!=j)
+		{ 
+			peso -= (vec[i].peso + vec[j].peso);
+			if (peso <= 0)
+				return;
+			else
+			{
+		/*		for (int m = 0; m < Grafo[i].size(); m++)
+					if (Grafo[i][m] == j)
+						{
+							comprobar = false;
+							break;
+						}*/
+				if (comprobar)
+					Grafo[i].push_back(j);
+			}
+		}
+		Ramificación_Poda(vec,Grafo,peso,i, j + 1);
+		Ramificación_Poda(vec, Grafo, peso, i+1, j );
+}
+
+int main()
+	{
+		srand(time(NULL));
+		int longitud;
+		int aleatorio;
+		cin >> longitud;
+		vector<elemento> vec;
+		vector<vector<int>> Grafo(longitud);
+		queue <int> colasa;
+		elemento tinocaso;
+		for (int i = 0; i < longitud;i++)
+			{
+				cin >> tinocaso.beneficio >> tinocaso.peso;
+				tinocaso.id = 0;
+				tinocaso.seleccionado = false;
+				vec.push_back(tinocaso);
+			}
+		aleatorio = rand() % longitud;
+		Ramificación_Poda(vec, Grafo, 16, 0, 0);
+		Mochila(vec, Grafo, aleatorio, 16);
+		cout << endl<<endl;
+		for (int i = 0; i < vec.size(); i++)
+			if (vec[i].seleccionado==true)
+				cout << vec[i].beneficio << " " << vec[i].peso<<endl;
+		_getch();
+	}
