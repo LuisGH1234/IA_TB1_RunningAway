@@ -85,6 +85,7 @@ private:
 
 		mochila.push_back(items[pos]);
 		items[pos].selected = true;
+		bool *p = &items[pos].selected;
 		pesoActual += items[pos].peso;
 
 		if (pesoActual > pesoMax) return;
@@ -97,14 +98,10 @@ private:
 			if (found == true) return;
 		}
 
-		//Se cambia de Raiz Padre
-		HillClimbing(0, pos + 1, {}, items);
-		/*
-			0 -> como cambio de Raiz Padre el peso actual se reinicia
-			pos -> cambio de Raiz Padre
-			{} -> la mochila la reseteo ya que cambie de Raiz Padre
-			resetItems(items) -> vuelve la variable Selected de todos a "false"
-		*/
+		*p = false;
+		pesoActual -= items[pos].peso;
+		mochila.pop_back();
+		HillClimbing(pesoActual, ++pos, mochila, items);
 	}
 
 	int sumaPesoTotalItems() 
