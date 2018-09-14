@@ -42,3 +42,9 @@ ipch
 
 #hidden visual studio settings
 .vs
+Debug
+.sln
+.VC
+.vcxproj
+.vcxproj.filters
+.vcxproj.user
