@@ -2,6 +2,7 @@
 #define KNAPSACK
 
 #include <vector>
+#include <list>
 
 using namespace std;
 using namespace System;
@@ -24,7 +25,13 @@ private:
 public:
 	Knapsack()
 	{
-		this->pesoMax = 0;
+		this->items = initItems();
+	}
+	Knapsack(int m)
+	{
+		this->pesoMax = m;
+		this->items = initItems();
+
 	}
 	Knapsack(int pesoMax, vector<Item> items)
 	{
@@ -114,17 +121,24 @@ private:
 		return aux;
 	}
 public:
-	vector<Item> HillClimbing() 
+	String^ HillClimbing() 
 	{
+		vector<Item> aux;
 		if (pesoMax > sumaPesoTotalItems())
-			return items;
-		HillClimbing(0, 0, {}, initItems());
-		String ^cad = gcnew String("");
-		for (int i = 0; i < _Mochila.size(); i++)
-		{
-			cad += "costo: " + _Mochila[i].costo + " - peso: " + _Mochila[i].peso + "\n";
+			aux = items;
+		else {
+			HillClimbing(0, 0, {}, this->items);
+			aux = _Mochila;
 		}
-		return _Mochila;
+		int sum = 0;
+		String ^cad = gcnew String("");
+		for (int i = 0; i < aux.size(); i++)
+		{
+			cad += "costo: " + aux[i].costo + " - peso: " + aux[i].peso + "\n";
+			sum += aux[i].costo;
+		}
+		cad += "-----------------------\n" + "		" + sum + "\n";
+		return cad;
 	}
 };
 
