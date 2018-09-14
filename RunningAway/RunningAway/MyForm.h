@@ -95,17 +95,17 @@ namespace RunningAway {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->btnLimpiar = (gcnew System::Windows::Forms::Button());
 			this->PresupuestoLabel = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->pesoMaxMochilaLabel = (gcnew System::Windows::Forms::Label());
 			this->DestinoLabel = (gcnew System::Windows::Forms::Label());
 			this->gboxOutputs = (gcnew System::Windows::Forms::GroupBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView3 = (gcnew System::Windows::Forms::DataGridView());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->mochilaLabel = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->gboxInputs->SuspendLayout();
 			this->gboxOutputs->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
@@ -221,6 +221,16 @@ namespace RunningAway {
 			this->PresupuestoLabel->TabIndex = 3;
 			this->PresupuestoLabel->Text = L"Presupuesto";
 			// 
+			// label2
+			// 
+			this->label2->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(115, 405);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(51, 16);
+			this->label2->TabIndex = 9;
+			this->label2->Text = L"label2";
+			// 
 			// pesoMaxMochilaLabel
 			// 
 			this->pesoMaxMochilaLabel->AutoSize = true;
@@ -264,6 +274,26 @@ namespace RunningAway {
 			this->gboxOutputs->TabStop = false;
 			this->gboxOutputs->Text = L"Resultados";
 			// 
+			// label5
+			// 
+			this->label5->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(593, 434);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(100, 20);
+			this->label5->TabIndex = 15;
+			this->label5->Text = L"Algoritmo 3";
+			// 
+			// label4
+			// 
+			this->label4->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(348, 433);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(100, 20);
+			this->label4->TabIndex = 14;
+			this->label4->Text = L"Algoritmo 2";
+			// 
 			// label3
 			// 
 			this->label3->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
@@ -273,6 +303,7 @@ namespace RunningAway {
 			this->label3->Size = System::Drawing::Size(100, 20);
 			this->label3->TabIndex = 13;
 			this->label3->Text = L"Algoritmo 1";
+			this->label3->Click += gcnew System::EventHandler(this, &MyForm::label3_Click);
 			// 
 			// dataGridView3
 			// 
@@ -310,16 +341,6 @@ namespace RunningAway {
 			this->dataGridView1->Size = System::Drawing::Size(237, 310);
 			this->dataGridView1->TabIndex = 10;
 			// 
-			// label2
-			// 
-			this->label2->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(115, 405);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(51, 16);
-			this->label2->TabIndex = 9;
-			this->label2->Text = L"label2";
-			// 
 			// mochilaLabel
 			// 
 			this->mochilaLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
@@ -329,26 +350,6 @@ namespace RunningAway {
 			this->mochilaLabel->Size = System::Drawing::Size(70, 20);
 			this->mochilaLabel->TabIndex = 8;
 			this->mochilaLabel->Text = L"Mochila";
-			// 
-			// label4
-			// 
-			this->label4->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(348, 433);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(100, 20);
-			this->label4->TabIndex = 14;
-			this->label4->Text = L"Algoritmo 2";
-			// 
-			// label5
-			// 
-			this->label5->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(593, 434);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(100, 20);
-			this->label5->TabIndex = 15;
-			this->label5->Text = L"Algoritmo 3";
 			// 
 			// MyForm
 			// 
@@ -375,6 +376,8 @@ namespace RunningAway {
 
 private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	
+}
+private: System::Void label3_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
