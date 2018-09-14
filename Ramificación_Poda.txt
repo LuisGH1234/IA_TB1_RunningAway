@@ -7,6 +7,7 @@
 using namespace System;
 using namespace std;
 
+
 struct item
 	{
 		int id;
@@ -14,11 +15,25 @@ struct item
 		int peso;
 	};
 
+
+int Mayor_Beneficio(vector<item> items, vector<vector<int>> Grafo, int aux ,int pesoacumulado,int peso)
+	{	
+		int mayorbeneficio = -1;
+		for (int i = 0; i <Grafo[aux].size(); i++)
+			if (mayorbeneficio < items[Grafo[aux][i]].beneficio &&
+				pesoacumulado + items[Grafo[aux][i]].peso <= peso)
+				mayorbeneficio = items[Grafo[aux][i]].id;
+		return mayorbeneficio;
+
+
+	}
+
 int main()
 	{
 		vector<item> items;
 		item auxItems;
-		int beneficio, peso, pesoacumulado=0;
+		vector<int> VecRespuesta;
+		int  peso, pesoacumulado=0;
 		int numItem;
 		int aux;
 		cin >> numItem >> peso;
@@ -30,47 +45,70 @@ int main()
 			}
 		queue<int> q;
 		vector<vector<int>> Grafo(items.size());
+		
 		int *incoming = new int[items.size()];
 		for (int i = 0; i < items.size(); i++)
 			incoming[i] = 0;
 		for(int i = 0; i < items.size();i++)
-			for(int j = 0; j < items.size();j++)
-				if(i!=j && items[i].beneficio < items[j].peso && items[i].peso+items[j].peso <= peso)
-					{
-						incoming[items[j].id]++;
-						Grafo[items[i].id].push_back(items[j].id);
-					}
+			{ 
+			//	pesoacumulado = items[i].peso;
+				for(int j = 0; j < items.size();j++)
+					if(i!=j && items[i].beneficio < items[j].peso &&/* pesoacumulado*/items[i].peso +items[j].peso <= peso)
+						{
+			//				pesoacumulado += items[j].peso;
+							incoming[items[j].id]++;
+							Grafo[items[i].id].push_back(items[j].id);
+						}
+			}
 		for (int i = 0; i < items.size(); i++)
 			if (incoming[i] == 0)
 				q.push(i);
 		int v;
+		int mayorbeneficio;
+		pesoacumulado = 0;
+		int k = 0;
+		vector<vector<int>> Tinocaso(q.size());
 		while(!q.empty())
 			{
+			
 				aux = q.front();
 				q.pop();
-				pesoacumulado += items[aux].peso;
-				if (pesoacumulado <= peso)
-					for (int i = 0; i < Grafo[aux].size(); i++)
+				pesoacumulado = items[aux].peso;
+				mayorbeneficio = 0;
+				cout << aux;
+				Tinocaso[k].push_back(aux);
+				while(1)
 					{
-						v = Grafo[aux][i];
-						incoming[v]--;
-						if (incoming[v] == 0)
-							q.push(v);
+						mayorbeneficio = Mayor_Beneficio(items, Grafo, aux, pesoacumulado, peso);
+						if (mayorbeneficio == -1) break;
+						pesoacumulado += items[mayorbeneficio].peso;
+						aux = mayorbeneficio;
+						Tinocaso[k].push_back(aux);
+						cout <<" "<<aux;
 					}
-				else
-					break;
-				if(q.empty() && pesoacumulado<= peso)
-					{
-						int mayor = 0;
-						for (int i = 0; i < Grafo[aux].size(); i++)
-							if (mayor < items[Grafo[aux][i]].beneficio/* && items[aux].beneficio<items[Grafo[aux][i]].peso*/)
-								mayor = Grafo[aux][i];
-						if (items[mayor].peso + pesoacumulado <= peso)
-							q.push(mayor);
-					}
-				
-				cout << aux << " ";
+				k++;
+				cout << endl;
 			}
+		mayorbeneficio = 0;
+		int acumular = 0;
+		int acumular2 = 0;
+		for (int j = 0; j < Tinocaso[0].size(); j++)
+			acumular += items[Tinocaso[0][j]].beneficio;
+		
+		for(int i= 1; i < Tinocaso.size();i++)
+			{ 
+				acumular2 = 0;
+				for (int j = 0; j < Tinocaso[i].size(); j++)
+					acumular2 += items[Tinocaso[i][j]].beneficio;
+				if(acumular2 > acumular)
+					{
+						acumular = acumular2;
+						mayorbeneficio = i;
+					}
+			}
+		cout << endl << endl;
+		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++)
+			cout << Tinocaso[mayorbeneficio][i]<<" ";
 		_getch();
 		return 0;
 	}

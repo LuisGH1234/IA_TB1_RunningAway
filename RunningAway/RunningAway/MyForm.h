@@ -324,6 +324,7 @@ namespace RunningAway {
 			this->label3->Size = System::Drawing::Size(100, 20);
 			this->label3->TabIndex = 13;
 			this->label3->Text = L"Algoritmo 1";
+			this->label3->Click += gcnew System::EventHandler(this, &MyForm::label3_Click);
 			// 
 			// mochilaLabel
 			// 
@@ -368,6 +369,8 @@ private: System::Void btnLimpiar_Click(System::Object^  sender, System::EventArg
 	txtPresupuesto->Clear();
 	cmbDestino->SelectedIndex = 0;
 	cmbOrigen->SelectedIndex = 0;
+}
+private: System::Void label3_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }

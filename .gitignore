@@ -48,3 +48,4 @@ Debug
 .vcxproj
 .vcxproj.filters
 .vcxproj.user
+Microsoft.Cpp.WindowsSDK.targets
