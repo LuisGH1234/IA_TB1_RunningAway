@@ -363,6 +363,7 @@ private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e
 private: System::Void btnCalcular_Click(System::Object^  sender, System::EventArgs^  e) {
 	Algoritmo1->SetPesoMax(Convert::ToInt32(txtPesoMax->Text));
 	label3->Text = Algoritmo1->HillClimbing();
+	label2->Text = Algoritmo1->Ramificacion_Poda();
 }
 private: System::Void btnLimpiar_Click(System::Object^  sender, System::EventArgs^  e) {
 	txtPesoMax->Clear();

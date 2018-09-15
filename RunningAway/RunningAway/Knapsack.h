@@ -156,7 +156,6 @@ public:
 
 	String^ Ramificacion_Poda()
 		{
-		Item auxItems;
 		vector<int> VecRespuesta;
 		int  peso, pesoacumulado = 0;
 		int numItem;
@@ -221,9 +220,10 @@ public:
 				mayorbeneficio = i;
 			}
 		}
-		
+		String^ cad = gcnew String("");
 		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++)
-			 Tinocaso[mayorbeneficio][i];
+			cad += "Beneficio: " + items[Tinocaso[mayorbeneficio][i]].beneficio + " -peso: " + items[Tinocaso[mayorbeneficio][i]].peso+"\n";
+		return cad;
 		}
 };
 
