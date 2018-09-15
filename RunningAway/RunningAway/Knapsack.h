@@ -3,16 +3,19 @@
 
 #include <vector>
 #include <list>
+#include <queue>
 
 using namespace std;
 using namespace System;
 
 struct Item
 {
+	int id = 0;
 	int costo = 0;
 	int peso = 0;
+	int beneficio = 0;
 	bool selected = false;
-	Item(int costo, int peso) : costo(costo), peso(peso) {}
+	Item(int id,int costo, int peso, int beneficio) : id(id),costo(costo), peso(peso), beneficio(beneficio){}
 };
 
 class Knapsack {
@@ -70,12 +73,12 @@ private:
 	vector<Item> initItems() 
 	{
 		vector<Item> aux;
-		aux.push_back(Item(8, 5));
-		aux.push_back(Item(7, 6));
-		aux.push_back(Item(12, 10));
-		aux.push_back(Item(6, 4));
-		aux.push_back(Item(2, 1));
-		aux.push_back(Item(3, 1));
+		aux.push_back(Item(0,8, 5,3));
+		aux.push_back(Item(1,7, 6,1));
+		aux.push_back(Item(2,12, 10,3));
+		aux.push_back(Item(3,6, 4,2));
+		aux.push_back(Item(4,2, 1,2));
+		aux.push_back(Item(5,3, 1,1));
 		return aux;
 	}
 
@@ -140,6 +143,88 @@ public:
 		cad += "-----------------------\n" + "		" + sum + "\n";
 		return cad;
 	}
+
+	int Mayor_Beneficio(vector<Item> items, vector<vector<int>> Grafo, int aux, int pesoacumulado, int peso)
+	{
+		int mayorbeneficio = -1;
+		for (int i = 0; i <Grafo[aux].size(); i++)
+			if (mayorbeneficio < items[Grafo[aux][i]].beneficio &&
+				pesoacumulado + items[Grafo[aux][i]].peso <= peso)
+				mayorbeneficio = items[Grafo[aux][i]].id;
+		return mayorbeneficio;
+	}
+
+	String^ Ramificacion_Poda()
+		{
+		Item auxItems;
+		vector<int> VecRespuesta;
+		int  peso, pesoacumulado = 0;
+		int numItem;
+		int aux;
+		queue<int> q;
+		vector<vector<int>> Grafo(items.size());
+
+		int *incoming = new int[items.size()];
+		for (int i = 0; i < items.size(); i++)
+			incoming[i] = 0;
+		for (int i = 0; i < items.size(); i++)
+		{
+			//	pesoacumulado = items[i].peso;
+			for (int j = 0; j < items.size(); j++)
+				if (i != j && items[i].beneficio < items[j].peso &&/* pesoacumulado*/items[i].peso + items[j].peso <= peso)
+				{
+					//				pesoacumulado += items[j].peso;
+					incoming[items[j].id]++;
+					Grafo[items[i].id].push_back(items[j].id);
+				}
+		}
+		for (int i = 0; i < items.size(); i++)
+			if (incoming[i] == 0)
+				q.push(i);
+		int v;
+		int mayorbeneficio;
+		pesoacumulado = 0;
+		int k = 0;
+		vector<vector<int>> Tinocaso(q.size());
+		while (!q.empty())
+		{
+
+			aux = q.front();
+			q.pop();
+			pesoacumulado = items[aux].peso;
+			mayorbeneficio = 0;
+			Tinocaso[k].push_back(aux);
+			while (1)
+			{
+				mayorbeneficio = Mayor_Beneficio(items, Grafo, aux, pesoacumulado, peso);
+				if (mayorbeneficio == -1) break;
+				pesoacumulado += items[mayorbeneficio].peso;
+				aux = mayorbeneficio;
+				Tinocaso[k].push_back(aux);
+			}
+			k++;
+		}
+		mayorbeneficio = 0;
+		int acumular = 0;
+		int acumular2 = 0;
+		for (int j = 0; j < Tinocaso[0].size(); j++)
+			acumular += items[Tinocaso[0][j]].beneficio;
+
+		for (int i = 1; i < Tinocaso.size(); i++)
+		{
+			acumular2 = 0;
+			for (int j = 0; j < Tinocaso[i].size(); j++)
+				acumular2 += items[Tinocaso[i][j]].beneficio;
+			if (acumular2 > acumular)
+			{
+				acumular = acumular2;
+				mayorbeneficio = i;
+			}
+		}
+		
+		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++)
+			 Tinocaso[mayorbeneficio][i];
+		}
 };
 
 #endif // !KNAPSACK
