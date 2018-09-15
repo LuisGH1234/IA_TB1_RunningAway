@@ -1,5 +1,6 @@
 #pragma once
 #include "Knapsack.h"
+#include "Knapsack2.h"
 namespace RunningAway {
 
 	using namespace System;
@@ -22,6 +23,7 @@ namespace RunningAway {
 			//TODO: Add the constructor code here
 			//
 			Algoritmo1 = new Knapsack();
+			Algoritmo2 = new Knapsack2();
 		}
 
 	protected:
@@ -80,11 +82,7 @@ namespace RunningAway {
 
 	private:
 		Knapsack *Algoritmo1;
-
-
-
-
-
+		Knapsack2 *Algoritmo2;
 
 			 /// <summary>
 		/// Required designer variable.
@@ -363,10 +361,14 @@ private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e
 private: System::Void btnCalcular_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (txtPesoMax->Text->Length <= 0)
 		return;
+	
 	Algoritmo1->SetPesoMax(Convert::ToInt32(txtPesoMax->Text));
 	label3->Text = Algoritmo1->HillClimbing();
 	Algoritmo1->resetItems();
 	label5->Text = Algoritmo1->Ramificacion_Poda();
+	
+	Algoritmo2->SetPesoMax_SetDineroMx(Convert::ToInt32(txtPesoMax->Text), Convert::ToInt32(txtPresupuesto->Text));
+	label4->Text = Algoritmo2->HillClimbing();
 }
 private: System::Void btnLimpiar_Click(System::Object^  sender, System::EventArgs^  e) {
 	txtPesoMax->Clear();

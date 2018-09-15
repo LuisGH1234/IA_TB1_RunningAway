@@ -63,7 +63,7 @@ public:
 				return false;
 		}
 		return true;
-	}
+	}	
 
 	void resetItems() {
 		for (int i = 0; i < items.size(); i++)
@@ -242,6 +242,7 @@ public:
 				" -costo" + items[Tinocaso[mayorbeneficio][i]].costo + "\n";
 		}
 		cad += "-----------------------\n" + "		" + sum + "\n";
+		resetItems(items);
 		return cad;
 		}
 };
