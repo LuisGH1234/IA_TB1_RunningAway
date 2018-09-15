@@ -62,12 +62,11 @@ public:
 		return true;
 	}
 
-	vector<Item> resetItems(vector<Item> items) {
+	void resetItems(vector<Item> items) {
 		for (int i = 0; i < items.size(); i++)
 		{
 			items[i].selected = false;
 		}
-		return items;
 	}
 private:
 	vector<Item> initItems() 
@@ -157,7 +156,7 @@ public:
 	String^ Ramificacion_Poda()
 		{
 		vector<int> VecRespuesta;
-		int  peso, pesoacumulado = 0;
+		int pesoacumulado = 0;
 		int numItem;
 		int aux;
 		queue<int> q;
@@ -170,7 +169,7 @@ public:
 		{
 			//	pesoacumulado = items[i].peso;
 			for (int j = 0; j < items.size(); j++)
-				if (i != j && items[i].beneficio < items[j].peso &&/* pesoacumulado*/items[i].peso + items[j].peso <= peso)
+				if (i != j && items[i].beneficio < items[j].peso &&/* pesoacumulado*/items[i].peso + items[j].peso <= pesoMax)
 				{
 					//				pesoacumulado += items[j].peso;
 					incoming[items[j].id]++;
@@ -187,7 +186,7 @@ public:
 		vector<vector<int>> Tinocaso(q.size());
 		while (!q.empty())
 		{
-
+			resetItems(items);
 			aux = q.front();
 			q.pop();
 			pesoacumulado = items[aux].peso;
@@ -196,7 +195,7 @@ public:
 			Tinocaso[k].push_back(aux);
 			while (1)
 			{
-				mayorbeneficio = Mayor_Beneficio(items, Grafo, aux, pesoacumulado, peso);
+				mayorbeneficio = Mayor_Beneficio(items, Grafo, aux, pesoacumulado, pesoMax);
 				if (mayorbeneficio == -1) break;
 				pesoacumulado += items[mayorbeneficio].peso;
 				aux = mayorbeneficio;
@@ -224,7 +223,7 @@ public:
 		}
 		String^ cad = gcnew String("");
 		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++)
-			cad += "Beneficio: " + items[Tinocaso[mayorbeneficio][i]].beneficio + " -peso: " + items[Tinocaso[mayorbeneficio][i]].peso+"\n";
+			cad += items[Tinocaso[mayorbeneficio][i]].id+" " +"Beneficio: " + items[Tinocaso[mayorbeneficio][i]].beneficio + " -peso: " + items[Tinocaso[mayorbeneficio][i]].peso+"\n";
 		return cad;
 		}
 };
