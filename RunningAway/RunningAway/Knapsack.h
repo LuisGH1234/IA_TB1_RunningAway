@@ -156,7 +156,7 @@ public:
 
 	String^ Ramificacion_Poda()
 		{
-		Item auxItems;
+		Item auxItems();
 		vector<int> VecRespuesta;
 		int  peso, pesoacumulado = 0;
 		int numItem;
