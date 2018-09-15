@@ -89,11 +89,13 @@ private:
 		aux.push_back(Item(3,6, 4,2));
 		aux.push_back(Item(4,2, 1,2));
 		aux.push_back(Item(5,3, 1,1));
+//		std::random_shuffle(std::begin(aux), std::end(aux));
 		return aux;
 	}
 
-	void HillClimbing(int pesoActual, int pos, vector<Item> mochila, vector<Item> &items)
+	void HillClimbing(int pesoActual, int pos, vector<Item> mochila, vector<Item> items)
 	{
+
 		if (found == true) return;
 		if (pesoActual == pesoMax) {
 			//se encontro la solucion y guardo el resultado
@@ -136,6 +138,7 @@ private:
 public:
 	String^ HillClimbing() 
 	{
+		found = false;
 		vector<Item> aux;
 		if (pesoMax > sumaPesoTotalItems())
 			aux = items;
@@ -151,6 +154,8 @@ public:
 			sum += aux[i].costo;
 		}
 		cad += "-----------------------\n" + sum + "\n";
+		resetItems();
+		resetItems(items);
 		return cad;
 	}
 
@@ -242,6 +247,7 @@ public:
 				" -costo" + items[Tinocaso[mayorbeneficio][i]].costo + "\n";
 		}
 		cad += "-----------------------\n" + "		" + sum + "\n";
+		resetItems();
 		resetItems(items);
 		return cad;
 		}

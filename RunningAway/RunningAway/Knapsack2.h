@@ -145,6 +145,7 @@ public:
 			}
 		cad += "---------------------- - \n" + sumCosto + "    " + sumPeso + "\n";
 		resetItems();
+		resetItems(items);
 		return cad;
 	}
 };
