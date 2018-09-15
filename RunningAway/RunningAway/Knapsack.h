@@ -47,6 +47,9 @@ public:
 		this->items.clear();
 	}
 
+	void limpiarItems() {
+		this->items.clear();
+	}
 	int GetPesoMax() { return this->pesoMax; }
 	vector<Item> GetItems() { return this->items; }
 	vector<Item> GetMochila() { return this->_Mochila; }
@@ -62,7 +65,18 @@ public:
 		return true;
 	}
 
+<<<<<<< HEAD
 	void resetItems(vector<Item> items) {
+=======
+	void resetItems() {
+		for (int i = 0; i < items.size(); i++)
+		{
+			this->items[i].selected = false;
+		}
+	}
+
+	vector<Item> resetItems(vector<Item> items) {
+>>>>>>> a934feb6e6b6a31e16a553ea15837feaa946895e
 		for (int i = 0; i < items.size(); i++)
 		{
 			items[i].selected = false;

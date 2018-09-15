@@ -3,9 +3,7 @@
 
 #include <algorithm>
 #include <map>
-#include <time.h>
 #include <vector>
-#include <stdlib.h>
 #include <queue>
 
 using namespace std;
@@ -57,14 +55,14 @@ public:
 			TMejor[i] = i;
 		}
 	}
-	void Algoritmo() 
+	/*void Algoritmo() 
 	{
 		int randA = rand() % tour.size();
 		int randB = rand() % tour.size();
 		if (randA == randB) return;
 
 		swap(tour[randA], tour[randB]);
-	}
+	}*/
 };
 
 #endif // !SIMULATEDANNEALING
