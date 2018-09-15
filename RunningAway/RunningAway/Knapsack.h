@@ -65,9 +65,6 @@ public:
 		return true;
 	}
 
-<<<<<<< HEAD
-	void resetItems(vector<Item> items) {
-=======
 	void resetItems() {
 		for (int i = 0; i < items.size(); i++)
 		{
@@ -76,11 +73,11 @@ public:
 	}
 
 	vector<Item> resetItems(vector<Item> items) {
->>>>>>> a934feb6e6b6a31e16a553ea15837feaa946895e
 		for (int i = 0; i < items.size(); i++)
 		{
 			items[i].selected = false;
 		}
+		return items;
 	}
 private:
 	vector<Item> initItems() 
@@ -153,7 +150,7 @@ public:
 			cad += "costo: " + aux[i].costo + " - peso: " + aux[i].peso + "\n";
 			sum += aux[i].costo;
 		}
-		cad += "-----------------------\n" + "		" + sum + "\n";
+		cad += "-----------------------\n" + sum + "\n";
 		return cad;
 	}
 
@@ -235,9 +232,16 @@ public:
 				mayorbeneficio = i;
 			}
 		}
+		int sum = 0;
 		String^ cad = gcnew String("");
-		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++)
-			cad += items[Tinocaso[mayorbeneficio][i]].id+" " +"Beneficio: " + items[Tinocaso[mayorbeneficio][i]].beneficio + " -peso: " + items[Tinocaso[mayorbeneficio][i]].peso+"\n";
+		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++) {
+			sum += items[Tinocaso[mayorbeneficio][i]].beneficio;
+			cad += items[Tinocaso[mayorbeneficio][i]].id + " " + 
+				"Beneficio: " + items[Tinocaso[mayorbeneficio][i]].beneficio + 
+				" -peso: " + items[Tinocaso[mayorbeneficio][i]].peso +
+				" -costo" + items[Tinocaso[mayorbeneficio][i]].costo + "\n";
+		}
+		cad += "-----------------------\n" + "		" + sum + "\n";
 		return cad;
 		}
 };
