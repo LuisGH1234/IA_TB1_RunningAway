@@ -94,17 +94,17 @@ private:
 		return aux;
 	}
 
-void hillclimbing(int dinero, int peso, int posicion,vector<Item> elementos, int k)
+void hillclimbing(int dinero, int peso, int posicion,vector<Item> &items, int k)
 	{
 		if (dinero == 0 || k == items.size() || peso == 0)
 			return;
-		if (dinero - elementos[k].costo >= 0 && elementos[k].selected == false && k != posicion && peso - elementos[k].peso >= 0)
+		if (dinero - items[k].costo >= 0 && items[k].selected == false && k != posicion && peso - items[k].peso >= 0)
 		{
-			peso -= elementos[k].peso;
-			dinero -= elementos[k].costo;
-			elementos[k].selected = true;
+			peso -= items[k].peso;
+			dinero -= items[k].costo;
+			items[k].selected = true;
 		}
-		hillclimbing(dinero, peso, posicion, elementos, k + 1);
+		hillclimbing(dinero, peso, posicion, items, k + 1);
 	}
 
 
