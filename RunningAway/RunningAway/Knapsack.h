@@ -47,6 +47,9 @@ public:
 		this->items.clear();
 	}
 
+	void limpiarItems() {
+		this->items.clear();
+	}
 	int GetPesoMax() { return this->pesoMax; }
 	vector<Item> GetItems() { return this->items; }
 	vector<Item> GetMochila() { return this->_Mochila; }
@@ -60,6 +63,13 @@ public:
 				return false;
 		}
 		return true;
+	}
+
+	void resetItems() {
+		for (int i = 0; i < items.size(); i++)
+		{
+			this->items[i].selected = false;
+		}
 	}
 
 	vector<Item> resetItems(vector<Item> items) {
@@ -149,14 +159,13 @@ public:
 		int mayorbeneficio = -1;
 		for (int i = 0; i <Grafo[aux].size(); i++)
 			if (mayorbeneficio < items[Grafo[aux][i]].beneficio &&
-				pesoacumulado + items[Grafo[aux][i]].peso <= peso)
+				pesoacumulado + items[Grafo[aux][i]].peso <= peso && items[Grafo[aux][i]].selected==false)
 				mayorbeneficio = items[Grafo[aux][i]].id;
 		return mayorbeneficio;
 	}
 
 	String^ Ramificacion_Poda()
 		{
-		Item auxItems();
 		vector<int> VecRespuesta;
 		int  peso, pesoacumulado = 0;
 		int numItem;
@@ -193,6 +202,7 @@ public:
 			q.pop();
 			pesoacumulado = items[aux].peso;
 			mayorbeneficio = 0;
+			items[aux].selected = true;
 			Tinocaso[k].push_back(aux);
 			while (1)
 			{
@@ -201,6 +211,7 @@ public:
 				pesoacumulado += items[mayorbeneficio].peso;
 				aux = mayorbeneficio;
 				Tinocaso[k].push_back(aux);
+				items[aux].selected = true;
 			}
 			k++;
 		}
@@ -221,9 +232,10 @@ public:
 				mayorbeneficio = i;
 			}
 		}
-		
+		String^ cad = gcnew String("");
 		for (int i = 0; i < Tinocaso[mayorbeneficio].size(); i++)
-			 Tinocaso[mayorbeneficio][i];
+			cad += "Beneficio: " + items[Tinocaso[mayorbeneficio][i]].beneficio + " -peso: " + items[Tinocaso[mayorbeneficio][i]].peso+"\n";
+		return cad;
 		}
 };
 
