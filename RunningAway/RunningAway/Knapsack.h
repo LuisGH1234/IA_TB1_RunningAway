@@ -92,7 +92,7 @@ private:
 		return aux;
 	}
 
-	void HillClimbing(int pesoActual, int pos, vector<Item> mochila, vector<Item> items)
+	void HillClimbing(int pesoActual, int pos, vector<Item> mochila, vector<Item> &items)
 	{
 		if (found == true) return;
 		if (pesoActual == pesoMax) {
