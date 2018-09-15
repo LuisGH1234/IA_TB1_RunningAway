@@ -149,7 +149,7 @@ public:
 		int mayorbeneficio = -1;
 		for (int i = 0; i <Grafo[aux].size(); i++)
 			if (mayorbeneficio < items[Grafo[aux][i]].beneficio &&
-				pesoacumulado + items[Grafo[aux][i]].peso <= peso)
+				pesoacumulado + items[Grafo[aux][i]].peso <= peso && items[Grafo[aux][i]].selected==false)
 				mayorbeneficio = items[Grafo[aux][i]].id;
 		return mayorbeneficio;
 	}
@@ -192,6 +192,7 @@ public:
 			q.pop();
 			pesoacumulado = items[aux].peso;
 			mayorbeneficio = 0;
+			items[aux].selected = true;
 			Tinocaso[k].push_back(aux);
 			while (1)
 			{
@@ -200,6 +201,7 @@ public:
 				pesoacumulado += items[mayorbeneficio].peso;
 				aux = mayorbeneficio;
 				Tinocaso[k].push_back(aux);
+				items[aux].selected = true;
 			}
 			k++;
 		}
